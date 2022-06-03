@@ -28,7 +28,7 @@ func (s *UserService) Authenticate() error {
 		case ErrRecordNotFound:
 			log.Print("ユーザ存在しない")
 		default:
-			return err
+			return errors.Wrap(err, "failed to userRepo.FindUser")
 		}
 	}
 
@@ -41,7 +41,7 @@ type userRepository struct {
 
 func (r *userRepository) FindUser(id string) error {
 	if err := r.db.Query("SELECT * FROM users WHERE id = ?", id); err != nil {
-		return err
+		return errors.Wrap(err, "failed to dbHandler.Query")
 	}
 	return nil
 }
@@ -49,6 +49,6 @@ func (r *userRepository) FindUser(id string) error {
 type dbHandler struct{}
 
 func (h dbHandler) Query(sql string, args ...interface{}) error {
-	//return errors.WithStack(ErrRecordNotFound)
-	return errors.WithStack(ErrUnknown)
+	//return errors.Wrap(ErrRecordNotFound, "failed to query")
+	return errors.Wrap(ErrUnknown, "failed to query")
 }
