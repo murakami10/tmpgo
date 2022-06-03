@@ -1,9 +1,9 @@
 package error
 
 import (
-	"errors"
-	"fmt"
 	"log"
+
+	"github.com/pkg/errors"
 )
 
 var (
@@ -14,7 +14,7 @@ var (
 func main() {
 	u := UserService{}
 	if err := u.Authenticate(); err != nil {
-		log.Fatal()
+		log.Fatal(err)
 	}
 }
 
@@ -24,11 +24,11 @@ type UserService struct {
 
 func (s *UserService) Authenticate() error {
 	if err := s.userRepo.FindUser("hoge"); err != nil {
-		return err
-		if errors.Is(err, ErrRecordNotFound) {
-			log.Fatal("ユーザが存在しない")
-		} else {
-			return fmt.Errorf("failed to userRepo.FindUser: %w", err)
+		switch errors.Cause(err) {
+		case ErrRecordNotFound:
+			log.Print("ユーザ存在しない")
+		default:
+			return err
 		}
 	}
 
@@ -41,7 +41,7 @@ type userRepository struct {
 
 func (r *userRepository) FindUser(id string) error {
 	if err := r.db.Query("SELECT * FROM users WHERE id = ?", id); err != nil {
-		return fmt.Errorf("faild to find user: %w", err)
+		return err
 	}
 	return nil
 }
@@ -49,5 +49,6 @@ func (r *userRepository) FindUser(id string) error {
 type dbHandler struct{}
 
 func (h dbHandler) Query(sql string, args ...interface{}) error {
-	return ErrRecordNotFound
+	//return errors.WithStack(ErrRecordNotFound)
+	return errors.WithStack(ErrUnknown)
 }
