@@ -1,13 +1,7 @@
 package main
 
-import (
-	"log"
-	"tmp/error"
-)
+import "tmp/file"
 
 func main() {
-	u := error.UserService{}
-	if err := u.Authenticate(); err != nil {
-		log.Fatalf("%+v", err)
-	}
+	file.TranslateFile()
 }

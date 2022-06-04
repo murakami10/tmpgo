@@ -6,8 +6,8 @@ import (
 )
 
 func File() {
-	//open()
-	seek()
+	open()
+	//seek()
 	//write()
 }
 
@@ -25,9 +25,11 @@ func open() {
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+
 	}
 	fmt.Println(count)
-	fmt.Println(data, string(data[:count]))
+	fmt.Println(data)
+	fmt.Println(string(data[:count]))
 
 }
 
