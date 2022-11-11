@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/golangci/golangci-lint v1.50.1
-	github.com/murakami10/tmpgo v0.0.0-20221111172830-ecc27e151b7d
 	github.com/pkg/errors v0.9.1
 	golang.org/x/tools v0.3.0
 )
