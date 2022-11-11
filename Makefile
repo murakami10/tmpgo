@@ -12,3 +12,10 @@ install-tools:
 ## 依存するpackageを最新版に更新する。
 update-module:
 	$(GOMOD) go mod tidy
+
+## .go-versonに記載されているバージョンのgoをインストール
+install-go:
+	@./tools/install_go.sh
+
+## 最初の準備するために全てのpackagesをinstallする
+bootstrap: install-go install-tools update-module
