@@ -1,5 +1,4 @@
-//module github.com/murakami10/tmpgo
-module tmpgo
+module github.com/murakami10/tmpgo
 
 go 1.18
 
