@@ -1,6 +1,6 @@
 package main
 
-import "tmp/file"
+import "github.com/murakami10/tmpgo/file"
 
 func main() {
 	file.ReadFileWithBuf()
