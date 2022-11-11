@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	packageee.Hello2()
+	packageee.Hello3()
 	//fmt.Println(he.he())
 }
