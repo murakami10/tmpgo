@@ -1,7 +1,12 @@
 package main
 
-import "github.com/murakami10/tmpgo/file"
+//"github.com/murakami10/tmpgo"
+
+import (
+	"github.com/murakami10/tmpgo/packageee"
+)
 
 func main() {
-	file.ReadFileWithBuf()
+	packageee.Hello2()
+	//fmt.Println(he.he())
 }
